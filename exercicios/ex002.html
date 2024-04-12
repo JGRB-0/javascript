@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu primeiro programa</title>
+</head>
+<body>
+    <h1 id="nome">Olá, Mundo</h1>
+    <p>Bem vindo aos primeiros comandos de JavaScript</p>
+    <script>
+        let nome = window.prompt('Qual é seu nome?')
+        window.alert(`bem vindo ${nome}`)
+        let pessoa = document.getElementById('nome')
+        pessoa.innerHTML = `Olá, ${nome}`
+    </script>
+</html>
