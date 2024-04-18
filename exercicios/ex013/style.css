@@ -1,0 +1,25 @@
+body {
+    background-color: rgb(18, 1, 33);
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+main {
+    background-color: white;
+    color: black;
+    max-width: 400px;
+    max-height: 150px;
+    padding: 15px;
+    margin: auto;
+    text-align: start;
+    display: flex;
+    gap: 30px;
+}
+
+main .console {
+    position: relative;
+    border: 1px solid black;
+    overflow-y: scroll;
+    padding: 5px;
+}

@@ -1,6 +1,6 @@
-let c = 0
+let c = 1
 
-while (c < 6){
-    console.log('Tudo bem?')
-    
+while (c <= 100){
+    console.log(`Tudo bem? ${c}`)
+    c++
 }
