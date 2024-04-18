@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendendo DOM</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: rgb(149, 149, 229);
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        button{
+            display: block;
+            border: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Iniciando estudos DOM</h1>
+    <p>aqui vai o resultado</p>
+    <p>Aprendendo a usar o <strong>DOM</strong> em JavaScript</p>
+    <button onclick="clicado()" class="bt1">Clique aqui!</button>
+
+    <script>
+        window.document.body.style.backgroundImage = 'linear-gradient(to right, blue, white)'
+        document.getElementsByTagName('p')[0].innerText = 'Esse paragrafo foi alterado pelo JS'
+        p1 = document.getElementsByTagName('p')[1]
+        document.write('o primeiro paragrafo do documento html é: '+ p1.innerHTML)  
+        b1 = document.querySelector('button.bt1')
+        b1.style.backgroundColor = 'purple'
+        function clicado(){
+            b1.style.backgroundColor = 'white'
+        }
+    </script>
+</body>
+</html>

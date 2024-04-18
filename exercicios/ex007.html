@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acusador de Multa</title>
+</head>
+<body>
+
+    <h1>Aprendendo sobre condições em JS</h1>
+    <h2>Digite a velocidade para consulta</h2>
+    <input type="number" name="velocidade" id="vel">
+    <input type="button" value="Enviar" onclick="verificar()">
+    <div id="con"></div>
+
+    <script>
+        let con = document.getElementById('con')
+        function verificar(){
+            let tvel = document.getElementById('vel')
+            let vel = Number(tvel.value)
+            con.innerHTML = `<p>Sua velocidade atual é: ${vel} km/h.</p>`
+
+            if(vel > 60){
+               con.innerHTML += '<p>Você está acima da velocidade permitida. <strong>MULTADO!</strong></p>'
+            }else{
+                con.innerHTML += '<p>Você está dentro da velocidade permitida. Parabéns</p>'
+            }
+        }
+    </script>
+    
+</body>
+</html>

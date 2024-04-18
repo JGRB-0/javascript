@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrangeiro ou Brasileiro?</title>
+</head>
+<body>
+
+    <h1>Treinando condições</h1>
+    <h2>Em que país você nasceu?</h2>
+    <input type="text" name="pais" id="input" placeholder="digite aqui...">
+    <input type="button" value="Enviar" onclick="verificar()">
+    <div id="console"></div>
+
+    <script>
+        function verificar(){
+            let input = document.getElementById('input')
+            let pais = input.value.toLowerCase()
+            let console = document.getElementById('console')
+            
+            if (pais == 'brasil'){
+                console.innerHTML = `<p>Você nasceu no ${pais}, portanto é brasileiro</p>`
+            }else{
+                console.innerHTML = `<p>Você nasceu no ${pais}, portanto é estrangeiro</p>`
+            }
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interatividade</title>
+    <style>
+        div#area{
+            display: flex;
+            background-color: blue;
+            width: 200px;
+            height: 200px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 2em;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="area">
+        <p>interaja...</p>
+    </div>
+
+    <script>
+        let area = document.getElementById('area')
+        area.addEventListener('click', clicou)
+        area.addEventListener('mouseenter', entrou)
+        area.addEventListener('mouseout', saiu)
+        function clicou(){
+            area.style.backgroundColor = 'red'
+            area.innerText = 'Clicou!'
+        }
+        function entrou(){
+            area.style.backgroundColor = 'blue'
+            area.innerText = 'Entrou!'
+        }
+        function saiu(){
+            area.style.backgroundColor = 'blue'
+            area.innerText = 'Saiu!'
+        }
+    </script>
+</body>
+</html>

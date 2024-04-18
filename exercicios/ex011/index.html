@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Idade</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Verificador de Idade</h1>
+
+    <main>
+        
+        <p class="ano">
+            Ano de Nascimento:
+            <input type="number" name="nano" id="ano" placeholder="digite aqui...">
+        </p>
+        
+        <p>Sexo:
+            <input type="radio" name="sexo" id="mas" checked><label for="mas">Masculino</label>
+            <input type="radio" name="sexo" id="fem"><label for="fem">Feminino</label>
+        </p>
+        
+        <button onclick="verificar()">Enviar</button>
+
+        <div class="con">
+            Preencha os dados acima para ver o resultado
+        </div>
+
+        <div class="img">
+            <img src="img/crianca-homem.jpg" alt="Foto exemplo" id="imagem">
+        </div>
+        
+    </main>
+
+    <p>@Jotinha PLays</p>
+
+    <script src="app.js"></script>
+</body>
+</html>
