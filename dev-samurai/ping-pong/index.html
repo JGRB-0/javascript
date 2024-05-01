@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Pong</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const mouse = {
+            x: 0,
+            y: 0
+        }
+        const canvasElement = document.querySelector('canvas#canvas'),
+            canvasContext = canvasElement.getContext('2d'),
+            lineWidth = 15,
+            gapX = 10,
+            field = {
+                w: window.innerWidth,
+                h: window.innerHeight,
+                draw: function(){
+                    canvasContext.fillStyle = '#286047'
+                    canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight)
+                }
+            },
+            midLine = {
+                w: 15,
+                h: window.innerHeight,
+                draw: function(){
+                    canvasContext.fillStyle = '#eee'
+                    canvasContext.fillRect((window.innerWidth/2 - this.w/2), 0, this.w, window.innerHeight)
+                }
+            },
+            leftRac = {
+                w: 15,
+                h: 200,
+                x: gapX,
+                y: 200,
+                _move: function(){
+                    this.y = ball.y - this.h/2
+                },
+                draw: function(){
+                    canvasContext.fillStyle = '#eee'
+                    canvasContext.fillRect(this.x, this.y, this.w, this.h)
+                    this._move()
+                }
+            },
+            rightRac = {
+                w: leftRac.w,
+                h: 200,
+                x: window.innerWidth - leftRac.w - gapX,
+                y: 400,
+                speed: 3,
+                _move: function(){
+
+                    if(this.y + this.h / 2 < ball.y + ball.r){
+                        this.y += this.speed
+                    }else{
+                        this.y -= this.speed
+                    }
+                },
+                speedUp: function(){
+                    this.speed += 1
+                },
+                draw: function(){
+                    canvasContext.fillStyle = '#eee'
+                    canvasContext.fillRect(this.x, this.y, this.w, this.h)
+                    this._move()
+                }
+            },
+            score = {
+                font: 'bold 78px Arial',
+                txtAl: 'center',
+                txtBL: 'top',
+                color: '#01341D',
+                left: 0,
+                right: 0,
+                increaseLeft: function(){
+                    this.left += 1
+                },
+                increaseRight: function(){
+                    this.right += 1
+                },
+                draw: function(){
+                    canvasContext.font = this.font
+                    canvasContext.textAlign = this.txtAl
+                    canvasContext.textBaseline = this.txtBL
+                    canvasContext.fillStyle = this.color
+                    canvasContext.fillText(this.left, window.innerWidth/4, 50)
+                    canvasContext.fillText(this.right, window.innerWidth/4 + window.innerWidth/2, 50)
+                }
+            },
+            ball = {
+                x: field.w / 2,
+                y: field.h / 2,
+                r: 20,
+                sAng: 0,
+                eAng: 2 * Math.PI,
+                antCl: false,
+                speed: 5,
+                directionX: 1,
+                directionY: 1,
+                calcPosition: function(){ // calculo da posição da bola para que ela rebata nas margens do campo
+                    if (this.y > (window.innerHeight - this.r) || this.y < 0 + this.r){
+                        this._reverseY() // invertendo direção da bola para que ela rebata nas margens superior e inferior
+                    }
+                    if (this.x > window.innerWidth - this.r - rightRac.w - gapX){  //verifica se a bola passou da lateral direita do campo
+
+                        if((this.y + this.r > rightRac.y) && (this.y - this.r < rightRac.y + rightRac.h)){ // Se tiver passado, verifica se ha alguma raquete no meio
+                            this._reverseX()   //caso haja, rebate a bola invertendo a direção x e aumenta a velocidade da bola
+                            this.speed += 0.5
+                        }else{
+                        score.increaseLeft()
+                        this._pointUp()     //caso nao haja, aumenta o score esquerdo e volta a bola para o meio do campo
+                        }
+                    }
+
+                    // fazendo pontuação do computador e aumentando a velocidade da bloa apos a rebatida
+                    if(this.x  < (this.r + leftRac.w + gapX) ){
+                        if(this.y > leftRac.y && this.y < leftRac.y + leftRac.h){
+                            this._reverseX()
+                            this.speed += 0.5
+                        }else{
+                            score.increaseRight()
+                            this._pointUp()
+                        }
+                    }
+                },
+                _pointUp: function(){       //volta a bola para o meio do campo e aumenta a velocidade de resposta do computador
+                    this.x = field.w/2
+                    this.y = field.h/2
+                    rightRac.speedUp()
+                },
+                _reverseX: function(){
+                    this.directionX = this.directionX * -1
+                },
+                _reverseY: function(){
+                    this.directionY = this.directionY * -1
+                },
+                _move: function(){
+                    this.x += this.directionX * this.speed
+                    this.y += this.directionY * this.speed
+                },draw: function(){
+                    canvasContext.fillStyle = '#eee'
+                    canvasContext.beginPath()
+                    canvasContext.arc(this.x, this.y, this.r, this.sAng, this.eAng, this.antCl)
+                    canvasContext.fill()
+                    this._move()
+                    this.calcPosition()
+                }
+            }
+            
+
+        function setup(){
+            canvasElement.width = canvasContext.width = window.innerWidth
+            canvasElement.height = canvasContext.height = window.innerHeight
+        }
+
+        function draw(){
+            // desenha gramado
+            field.draw()
+
+            //desenha linha central
+            midLine.draw()
+
+            //desenha a raquete esquerda
+            leftRac.draw()
+
+            //desenha a raquete direita
+            rightRac.draw()
+
+            //desenha placar
+            score.draw()
+
+            //desenha bola
+            ball.draw()
+
+            
+        }
+
+    window.animateFrame = (function(){
+        return(
+            window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(callback){
+                return window.setTimeout(callback, 1000 / 60)
+            }
+        )
+    }) ()
+
+    function main(){
+        animateFrame(main)
+        draw()
+    }
+
+    setup()
+    main()
+
+    canvasElement.addEventListener('mousemove', function(e){
+        mouse.x = e.pageX
+        mouse.y = e.pageY
+    })
+
+    </script>
+</body>
+</html>

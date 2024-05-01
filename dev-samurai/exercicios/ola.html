@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let idioma = prompt("Qual o seu idioma? (Responda com a linguagem abreviada ex: pt, en...)")
+        let variacao = prompt('Qual a variação?')
+        switch(idioma, variacao){
+            case 'pt', 'pt': 
+                alert('Olá Mundo!')
+                break
+            case 'en', 'us':
+                alert('Hi World!')
+                break
+            case 'en', 'gb':
+                alert('Hello World!')
+                break
+            default:
+                alert("Desculpe, nao identifiquei o idioma digitado!")
+        }
+    </script>
+</body>
+</html>
